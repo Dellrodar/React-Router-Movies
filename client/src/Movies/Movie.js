@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
-import { useParams } from 'react-router-dom';
+import React, { useState, useEffect } from "react";
+import axios from "axios";
+import { useParams } from "react-router-dom";
 
 const Movie = (props) => {
   const [movie, setMovie] = useState();
@@ -12,20 +12,21 @@ const Movie = (props) => {
 
     axios
       .get(`http://localhost:5000/api/movies/${id}`)
-      .then(response => {
+      .then((response) => {
         setMovie(response.data);
+        console.log(response.data)
       })
-      .catch(error => {
+      .catch((error) => {
         console.error(error);
       });
-
   }, []);
 
+
   // Uncomment this only when you have moved on to the stretch goals
-  // const saveMovie = () => {
-  //   const addToSavedList = props.addToSavedList;
-  //   addToSavedList(movie)
-  // }
+  const saveMovie = () => {
+    const addToSavedList = props.addToSavedList;
+    addToSavedList(movie);
+  };
 
   if (!movie) {
     return <div>Loading movie information...</div>;
@@ -44,7 +45,7 @@ const Movie = (props) => {
         </div>
         <h3>Actors</h3>
 
-        {stars.map(star => (
+        {stars.map((star) => (
           <div key={star} className="movie-star">
             {star}
           </div>
@@ -53,6 +54,6 @@ const Movie = (props) => {
       <div className="save-button">Save</div>
     </div>
   );
-}
+};
 
 export default Movie;
